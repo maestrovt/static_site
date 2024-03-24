@@ -8,7 +8,7 @@ class HTMLNode:
         raise NotImplementedError("to_html method not implemented")
     def props_to_html(self):
         props_list = [f'{key}="{value}"' for key, value in self.props.items()]
-        return ' '.join(props_list)
+        return ' ' + ' '.join(props_list) if props_list else ''
     def __repr__(self):
         props_list = [f'{key}="{value}"' for key, value in self.props.items()]
-        return f"HTMLNode(tag = {self.tag}, value = {self.value}, " + "children = " + ', '.join(self.children) + ", props = " + ' '.join(props_list)
+        return f"HTMLNode(tag = {self.tag}, value = {self.value}, " + "children = " + ', '.join(self.children) + ", props = " + ' '.join(props_list)+")"
