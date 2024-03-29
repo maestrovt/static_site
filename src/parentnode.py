@@ -20,11 +20,11 @@ class ParentNode(HTMLNode):
 
         # Start the HTML string with the opening tag
         html = f"<{self.tag}>"
+        html += self.props_to_html()
 
         # Iterate through the children and recursively call to_html on each
         for child in self.children:
            html += child.to_html()
-
         # Close the tag
         html += f"</{self.tag}>"
 
