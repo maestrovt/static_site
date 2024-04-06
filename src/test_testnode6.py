@@ -6,8 +6,9 @@ from textnode import (
     text_type_bold,
     text_type_italic,
     text_type_code,
-    split_nodes_delimiter
 )
+
+from inline_markdown import split_nodes_delimiter
 
 
 class TestInlineMarkdown(unittest.TestCase):
