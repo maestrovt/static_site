@@ -1,4 +1,7 @@
 import unittest
+from inline_markdown import (
+    split_nodes_delimiter,
+)
 
 from textnode import (
     TextNode,
@@ -7,8 +10,6 @@ from textnode import (
     text_type_italic,
     text_type_code,
 )
-
-from inline_markdown import split_nodes_delimiter
 
 
 class TestInlineMarkdown(unittest.TestCase):
@@ -23,6 +24,7 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             new_nodes,
         )
+
     def test_delim_bold_double(self):
         node = TextNode(
             "This is text with a **bolded** word and **another**", text_type_text
@@ -37,6 +39,7 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             new_nodes,
         )
+
     def test_delim_bold_multiword(self):
         node = TextNode(
             "This is text with a **bolded word** and **another**", text_type_text
@@ -51,6 +54,7 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             new_nodes,
         )
+
     def test_delim_italic(self):
         node = TextNode("This is text with an *italic* word", text_type_text)
         new_nodes = split_nodes_delimiter([node], "*", text_type_italic)
@@ -62,6 +66,7 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             new_nodes,
         )
+
     def test_delim_code(self):
         node = TextNode("This is text with a `code block` word", text_type_text)
         new_nodes = split_nodes_delimiter([node], "`", text_type_code)
@@ -73,6 +78,7 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             new_nodes,
         )
+
 
 if __name__ == "__main__":
     unittest.main()
