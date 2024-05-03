@@ -7,6 +7,7 @@ from inline_markdown import (
     split_nodes_image,
     split_nodes_link,
     text_to_textnodes,
+    markdown_to_blocks,
 )
 
 from textnode import (
@@ -236,8 +237,82 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             nodes,
         )
+    def test_markdown_to_blocks_bd(self):
+        markdown = """
+This is **bolded** paragraph
+
+This is another paragraph with *italic* text and `code` here
+This is the same paragraph on a new line
+
+* This is a list
+* with items
+"""
+        blocks = markdown_to_blocks(markdown)
+        self.assertListEqual(
+            [
+                'This is **bolded** paragraph',
+                'This is another paragraph with *italic* text and `code` here\nThis is the same paragraph on a new line',
+                '* This is a list\n* with items'
+            ], blocks
+        )
+    def test_markdown_to_blocks_1(self):
+        markdown = """
+This is a paragraph with trailing space    
+
+And here's another with leading space 
+   This line should be trimmed as well.
+
+   * List with extra indentation
+   * Second item with extra space
+
+"""
+        blocks = markdown_to_blocks(markdown)
+        self.assertListEqual(
+            [
+                'This is a paragraph with trailing space',
+                "And here's another with leading space\nThis line should be trimmed as well.",
+                '* List with extra indentation\n* Second item with extra space'
+            ],
+            blocks
+        )
+    def test_markdown_to_blocks_2(self):
+        markdown = """
+This is a paragraph
+followed immediately by another line of the same paragraph.
+
+But here's a new block.
+
+* List item
+* Another item
 
 
+* Mistakenly spaced list item
+"""
+        blocks = markdown_to_blocks(markdown)
+        self.assertListEqual(
+            [
+                'This is a paragraph\nfollowed immediately by another line of the same paragraph.',
+                "But here's a new block.",
+                '* List item\n* Another item',
+                '* Mistakenly spaced list item'
+            ],
+            blocks
+        )
+    def test_markdown_to_blocks_3(self):
+        markdown = """
+ First line with a leading space
+Second line of the first block
+    Third line with indentation that should be removed
 
+Another block starts here and should be cleanly separated from the first
+"""
+        blocks = markdown_to_blocks(markdown)
+        self.assertListEqual(
+            [
+                'First line with a leading space\nSecond line of the first block\nThird line with indentation that should be removed',
+                'Another block starts here and should be cleanly separated from the first'
+            ],
+            blocks
+        )
 if __name__ == "__main__":
     unittest.main()

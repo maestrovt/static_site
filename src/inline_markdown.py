@@ -19,6 +19,18 @@ def text_to_textnodes(text):
     nodes = split_nodes_link(nodes)
     return nodes
 
+def markdown_to_blocks(markdown):
+    # Split the markdown text at each sequence of one or more newline characters
+    blocks = re.split(r'\n{2,}', markdown.strip())
+    
+    # Remove leading and trailing whitespace from each block
+    blocks = [block.strip() for block in blocks]
+    
+    # Split inside blocks by new line and join again to ensure no internal multiple newlines
+    blocks = ['\n'.join(line.strip() for line in block.split('\n')) for block in blocks]
+    
+    return blocks
+
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []
     for old_node in old_nodes:
