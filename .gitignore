@@ -3,3 +3,6 @@ Screenshot 2024-03-16 at 1.57.05 PM.png
 src/inline_markdown_bd.py
 src/markdown_blocks_bd.py
 src/markdown_blocks_bd_2.py
+public/
+src/copy_tree.txt
+copy_log.txt
