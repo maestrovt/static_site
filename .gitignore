@@ -4,6 +4,7 @@ src/inline_markdown_bd.py
 src/markdown_blocks_bd.py
 src/markdown_blocks_bd_2.py
 src/gencontent.py
+src/main_bd.py
 public/
 src/copy_tree.txt
 copy_log.txt
