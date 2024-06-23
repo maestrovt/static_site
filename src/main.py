@@ -1,6 +1,10 @@
 import os, shutil
+
+
 from copystatic import copy_tree
 from generate_page import generate_page_recursive
+
+
 def main():
     src = "static"
     target = "public"
